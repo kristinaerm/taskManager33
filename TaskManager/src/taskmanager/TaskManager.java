@@ -54,7 +54,7 @@ public class TaskManager {
             // Вызываем метод для добавления 
             Loader.addUser(document,u);
             User us=Loader.readDocument(document);
-        for(int i=0;i<us.getTaskLog().getRecords().size();i++)
+        for(int i=0;i<us.getTaskLog().getNumberOfRecords();i++)
         {
             System.out.println(us.getTaskLog().getRecord(i).getName());
             System.out.println(us.getTaskLog().getRecord(i).getDescription());

@@ -37,7 +37,7 @@ public class Loader {
       Element user1=document.createElement("user");
       //<name>
        Element id=document.createElement("id");
-       System.out.println("Введите id пользователя:");
+       //System.out.println("Введите id пользователя:");
      //   id.setTextContent(sc.nextLine());
      //  id.setTextContent(us);
       Element name=document.createElement("name");
@@ -45,14 +45,14 @@ public class Loader {
       name.setTextContent("Название:");
       
       Element name1=document.createElement("name1");
-      System.out.println("Введите название задачи");
+     // System.out.println("Введите название задачи");
      // name1.setTextContent(sc.nextLine());
       name1.setTextContent(us.getTaskLog().getRecord(i).getName());
       Element description=document.createElement("description");
       description.setTextContent("Описание:");
       
       Element description1=document.createElement("description1");
-      System.out.println("Введите описание задачи:");
+     // System.out.println("Введите описание задачи:");
      // description1.setTextContent(sc.nextLine());
        description1.setTextContent(us.getTaskLog().getRecord(i).getDescription());
       Element timedate=document.createElement("timedate");
@@ -60,14 +60,14 @@ public class Loader {
      
         
       Element timedate1=document.createElement("timedate1");
-      System.out.println("Введите время(дату) когда должна выполниться задача:");
+     // System.out.println("Введите время(дату) когда должна выполниться задача:");
     //  timedate1.setTextContent(sc.nextLine());
       timedate1.setTextContent(us.getTaskLog().getRecord(i).getTimeString());
       Element contacts=document.createElement("contacts");
       contacts.setTextContent("Контакты:");
       
      Element contacts1=document.createElement("contacts1");
-     System.out.println("Введите контакты:");
+     //System.out.println("Введите контакты:");
      //contacts1.setTextContent(sc.nextLine());
      contacts1.setTextContent(us.getTaskLog().getRecord(i).getContacts());
      //добавление внутренних элементов в элемент <Info>
@@ -95,14 +95,18 @@ public class Loader {
         String description1=null;
         String timedate1=null;
         String contacts1=null;
+       
          LinkedList<Record> list=new LinkedList<Record>();
 //          System.out.println("Корневой элемент: "
 //                    + document.getDocumentElement().getNodeName());
+             
+           
          NodeList nodeList = document.getElementsByTagName("user");
- 
+         
             for (int i = 0; i < nodeList.getLength(); i++) {
                 // Выводим информацию по каждому из найденных элементов
                 Node node = nodeList.item(i);
+                  
                 System.out.println("Текущий элемент: " + node.getNodeName());
                 if (Node.ELEMENT_NODE == node.getNodeType()) {
                     Element element = (Element) node;
@@ -111,14 +115,15 @@ public class Loader {
                     description1=element.getElementsByTagName("description1").item(0).getTextContent();
                   timedate1=element.getElementsByTagName("timedate1").item(0).getTextContent();
                  contacts1=element.getElementsByTagName("contacts1").item(0).getTextContent();
+                       
                 }
-            }
+            
             Record rec=new Record(name1,description1,timedate1,contacts1);
             list.add(rec);
-
+            }
          return new User(id, null, null, list);
     }
-
+    
     public static void writeDocument(Document document) throws TransformerConfigurationException, FileNotFoundException, TransformerException {
          Transformer tr=TransformerFactory.newInstance().newTransformer();
     DOMSource source=new DOMSource(document);
