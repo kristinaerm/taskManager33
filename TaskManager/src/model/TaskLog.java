@@ -30,6 +30,10 @@ public class TaskLog {
         return records;
     }
     
+    public int getNumberOfRecords(){
+        return records.size();
+    }
+    
     public void changeRecord (int n, String na, String ti, String des, String con){
         Record rec = records.get(n);
         if ((!na.equals(""))) {

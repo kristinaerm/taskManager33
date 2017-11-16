@@ -145,7 +145,7 @@ public class SimpleNotification extends javax.swing.JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         currentTaskLog.deleteRecord(0);
-        //закрыть, оповестить, перерисовать
+        //закрыть
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -154,7 +154,7 @@ public class SimpleNotification extends javax.swing.JFrame{
         instance.setTime(currentRec.getTime()); 
         instance.add(Calendar.MINUTE,10);
         currentRec.setTimeDate(instance.getTime());
-        //закрыть, оповестить, перерисовать
+        //закрыть
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
