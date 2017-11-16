@@ -13,7 +13,7 @@ import java.util.LinkedList;
  */
 //  проверочка
 public class User {
-    private final String id;
+    private String id;
     private final String login;
     private final String password;
     private TaskLog taskLog;
@@ -24,7 +24,23 @@ public class User {
         password = p;
         taskLog = new TaskLog(rec);
     }
+    
+    public String getId(){
+        return id;
+    }
+    
+    public void setId (String i){
+        id=i;
+    }
 
+    public String getLogin(){
+        return login;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
+    
     public TaskLog getTaskLog(){
         return taskLog;
     }

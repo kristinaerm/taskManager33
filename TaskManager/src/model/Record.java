@@ -14,6 +14,7 @@ import java.util.Date;
  * @author USER
  */
 public class Record implements Comparable{
+    private String id;
     private String name;
     private String description;
     private Date time;
@@ -38,6 +39,10 @@ public class Record implements Comparable{
         }
     }
     
+    public void setId(String i){
+        id=i;
+    }
+    
     public void setTime(String s){
         try {
             time = dateTimeFormatter.parse(s);
@@ -60,6 +65,10 @@ public class Record implements Comparable{
 
     public void setContacts(String c) {
         contacts = c;
+    }
+    
+    public String getId(){
+        return id;
     }
     
     public String getName(){

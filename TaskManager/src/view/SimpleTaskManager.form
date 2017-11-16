@@ -253,7 +253,8 @@
             <Component class="javax.swing.JTable" name="jTable1">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="9">
+                  <Table columnCount="5" rowCount="9">
+                    <Column editable="false" title="&#x2116;" type="java.lang.Integer"/>
                     <Column editable="false" title="&#x41d;&#x430;&#x437;&#x432;&#x430;&#x43d;&#x438;&#x435;" type="java.lang.String"/>
                     <Column editable="false" title="&#x414;&#x430;&#x442;&#x430; &#x438; &#x432;&#x440;&#x435;&#x43c;&#x44f;" type="java.lang.String"/>
                     <Column editable="false" title="&#x41e;&#x43f;&#x438;&#x441;&#x430;&#x43d;&#x438;&#x435;" type="java.lang.String"/>

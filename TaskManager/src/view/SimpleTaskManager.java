@@ -119,25 +119,25 @@ public class SimpleTaskManager extends javax.swing.JFrame{
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Название", "Дата и время", "Описание", "Контакты"
+                "№", "Название", "Дата и время", "Описание", "Контакты"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -283,18 +283,7 @@ public class SimpleTaskManager extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void updateTable(){
-        jTable1 = new JTable(createData(), columnNames);
-    }
-    
-    private Object[][] createData(){
-        Object[][] data = new Object[currentTaskLog.getNumberOfRecords()][4];
-        for (int i = 0; i < currentTaskLog.getNumberOfRecords(); i++){            
-                data[i][0] = currentTaskLog.getRecord(i).getName();
-                data[i][1] = currentTaskLog.getRecord(i).getTimeString();
-                data[i][2] = currentTaskLog.getRecord(i).getDescription();
-                data[i][3] = currentTaskLog.getRecord(i).getContacts();            
-        }
-        return data;
+        jTable1 = new JTable(currentTaskLog.createData(), columnNames);
     }
     
     private void updateNotification(){
@@ -338,7 +327,7 @@ public class SimpleTaskManager extends javax.swing.JFrame{
             }
         });
     }
-    String[] columnNames = {"Название","Время и дата","Описание","Контакты"};
+    String[] columnNames = {"№", "Название","Время и дата","Описание","Контакты"};
     private User currentUser;
     private TaskLog currentTaskLog;
     Timer timer = new Timer();
