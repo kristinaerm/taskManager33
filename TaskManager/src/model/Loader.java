@@ -126,6 +126,7 @@ public class Loader {
 
     public static void clearDocument(Document document) {
         //очистка документа
+       
     }
 
     
