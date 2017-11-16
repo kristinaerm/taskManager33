@@ -33,7 +33,7 @@ public class TaskManager {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ParseException, FileNotFoundException, SAXException, ParserConfigurationException, IOException, TransformerException {
-    SimpleTaskManager frame = new SimpleTaskManager();
+        SimpleTaskManager frame = new SimpleTaskManager();
         
         frame.setResizable(false);
         frame.pack();
