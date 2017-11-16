@@ -26,12 +26,31 @@ public class TaskLog {
         sort();
     }
     
+    public String getId(){
+        return id;
+    }
+    public void setId(String i){
+        id=i;
+    }
+    
     public LinkedList<Record> getRecords(){
         return records;
     }
     
     public int getNumberOfRecords(){
         return records.size();
+    }
+    
+    public Object[][] createData() {
+        Object[][] data = new Object[records.size()][5];
+        for (int i = 0; i < records.size(); i++) {
+            data[i][0] = i;
+            data[i][1] = this.getRecord(i).getName();
+            data[i][2] = this.getRecord(i).getTimeString();
+            data[i][3] = this.getRecord(i).getDescription();
+            data[i][4] = this.getRecord(i).getContacts();
+        }
+        return data;
     }
     
     public void changeRecord (int n, String na, String ti, String des, String con){
