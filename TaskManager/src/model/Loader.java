@@ -125,6 +125,8 @@ public class Loader {
 
     public static void clearDocument(Document document) {
         try {
+            Node root = document.getDocumentElement();
+            document.removeChild(root);
             writeDocument(document);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
