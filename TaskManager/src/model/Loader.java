@@ -6,8 +6,13 @@
 package model;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -28,7 +33,6 @@ public class Loader {
     //тут устраивай, как тебе удобнее, потом скажешь
     //, User user
     public static void addUser(Document document,User us) throws FileNotFoundException, TransformerException {
-        Scanner sc = new Scanner(System.in);
     //Получаем корневой элемент
    for(int i=0;i<us.getTaskLog().getRecords().size();i++)
    {
@@ -37,38 +41,28 @@ public class Loader {
       Element user1=document.createElement("user");
       //<name>
        Element id=document.createElement("id");
-       //System.out.println("Введите id пользователя:");
-     //   id.setTextContent(sc.nextLine());
-     //  id.setTextContent(us);
+       id.setTextContent(us.getId());
       Element name=document.createElement("name");
       //установка значения текста внутри тегов
       name.setTextContent("Название:");
       
       Element name1=document.createElement("name1");
-     // System.out.println("Введите название задачи");
-     // name1.setTextContent(sc.nextLine());
       name1.setTextContent(us.getTaskLog().getRecord(i).getName());
       Element description=document.createElement("description");
       description.setTextContent("Описание:");
       
       Element description1=document.createElement("description1");
-     // System.out.println("Введите описание задачи:");
-     // description1.setTextContent(sc.nextLine());
        description1.setTextContent(us.getTaskLog().getRecord(i).getDescription());
       Element timedate=document.createElement("timedate");
       timedate.setTextContent("время(дата)оповещения:");
      
         
       Element timedate1=document.createElement("timedate1");
-     // System.out.println("Введите время(дату) когда должна выполниться задача:");
-    //  timedate1.setTextContent(sc.nextLine());
       timedate1.setTextContent(us.getTaskLog().getRecord(i).getTimeString());
       Element contacts=document.createElement("contacts");
       contacts.setTextContent("Контакты:");
       
      Element contacts1=document.createElement("contacts1");
-     //System.out.println("Введите контакты:");
-     //contacts1.setTextContent(sc.nextLine());
      contacts1.setTextContent(us.getTaskLog().getRecord(i).getContacts());
      //добавление внутренних элементов в элемент <Info>
      user1.appendChild(id);
@@ -97,9 +91,6 @@ public class Loader {
         String contacts1=null;
        
          LinkedList<Record> list=new LinkedList<Record>();
-//          System.out.println("Корневой элемент: "
-//                    + document.getDocumentElement().getNodeName());
-             
            
          NodeList nodeList = document.getElementsByTagName("user");
          
@@ -133,8 +124,13 @@ public class Loader {
     }
 
     public static void clearDocument(Document document) {
-        //очистка документа
-       
+        try {
+            writeDocument(document);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     

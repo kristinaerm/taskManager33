@@ -50,10 +50,11 @@ public class TaskManager {
            LinkedList<Record>list=new LinkedList<Record>();
            list.add(new Record("task1","tas","2015-10-22 22:10","18486"));
            list.add(new Record("task2","tas","2015-10-22 22:10","18486"));
-
-          User u=new User("1",null,null,list);
+           
+         User u=new User("1",null,null,list);
             // Вызываем метод для добавления 
             Loader.addUser(document,u);
+        
             User us=Loader.readDocument(document);
         for(int i=0;i<us.getTaskLog().getNumberOfRecords();i++)
         {
@@ -62,7 +63,7 @@ public class TaskManager {
             System.out.println(us.getTaskLog().getRecord(i).getTimeString());
             System.out.println(us.getTaskLog().getRecord(i).getContacts());
         }
-     
+    
              
 }
 }
