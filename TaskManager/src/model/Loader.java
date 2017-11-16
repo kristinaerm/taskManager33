@@ -27,47 +27,49 @@ public class Loader {
     
     //тут устраивай, как тебе удобнее, потом скажешь
     //, User user
-    public static void addUser(Document document) throws FileNotFoundException, TransformerException {
+    public static void addUser(Document document,User us) throws FileNotFoundException, TransformerException {
         Scanner sc = new Scanner(System.in);
     //Получаем корневой элемент
+   for(int i=0;i<us.getTaskLog().getRecords().size();i++)
+   {
       Node root = document.getDocumentElement();
       //создам новую задачу по элементно
       Element user1=document.createElement("user");
       //<name>
        Element id=document.createElement("id");
        System.out.println("Введите id пользователя:");
-        id.setTextContent(sc.nextLine());
-       
+     //   id.setTextContent(sc.nextLine());
+     //  id.setTextContent(us);
       Element name=document.createElement("name");
       //установка значения текста внутри тегов
       name.setTextContent("Название:");
       
       Element name1=document.createElement("name1");
       System.out.println("Введите название задачи");
-      name1.setTextContent(sc.nextLine());
-      
+     // name1.setTextContent(sc.nextLine());
+      name1.setTextContent(us.getTaskLog().getRecord(i).getName());
       Element description=document.createElement("description");
       description.setTextContent("Описание:");
       
       Element description1=document.createElement("description1");
       System.out.println("Введите описание задачи:");
-      description1.setTextContent(sc.nextLine());
-      
+     // description1.setTextContent(sc.nextLine());
+       description1.setTextContent(us.getTaskLog().getRecord(i).getDescription());
       Element timedate=document.createElement("timedate");
       timedate.setTextContent("время(дата)оповещения:");
      
         
       Element timedate1=document.createElement("timedate1");
       System.out.println("Введите время(дату) когда должна выполниться задача:");
-      timedate1.setTextContent(sc.nextLine());
-      
+    //  timedate1.setTextContent(sc.nextLine());
+      timedate1.setTextContent(us.getTaskLog().getRecord(i).getTimeString());
       Element contacts=document.createElement("contacts");
       contacts.setTextContent("Контакты:");
       
      Element contacts1=document.createElement("contacts1");
      System.out.println("Введите контакты:");
-     contacts1.setTextContent(sc.nextLine());
-     
+     //contacts1.setTextContent(sc.nextLine());
+     contacts1.setTextContent(us.getTaskLog().getRecord(i).getContacts());
      //добавление внутренних элементов в элемент <Info>
      user1.appendChild(id);
      user1.appendChild(name);
@@ -84,6 +86,7 @@ public class Loader {
      
      // Записываем XML в файл
         writeDocument(document);
+   }   
     }
 
     public static User readDocument(Document document) {

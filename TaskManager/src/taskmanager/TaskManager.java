@@ -11,12 +11,14 @@ import view.SimpleTaskManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import model.Loader;
+import model.Record;
 import model.User;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -44,9 +46,13 @@ public class TaskManager {
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             // Создается дерево DOM документа из файла
            Document document = documentBuilder.parse("Catalog.xml");
- 
+           LinkedList<Record>list=new LinkedList<Record>();
+           list.add(new Record("task1","tas","2015-10-22 22:10","18486"));
+           list.add(new Record("task2","tas","2015-10-22 22:10","18486"));
+
+          User u=new User("1",null,null,list);
             // Вызываем метод для добавления 
-            Loader.addUser(document);
+            Loader.addUser(document,u);
             User us=Loader.readDocument(document);
         for(int i=0;i<us.getTaskLog().getRecords().size();i++)
         {
