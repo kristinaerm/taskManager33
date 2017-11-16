@@ -17,6 +17,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import model.DataCheck;
 import model.Loader;
 import model.Record;
 import model.User;
@@ -61,7 +62,7 @@ public class TaskManager {
             System.out.println(us.getTaskLog().getRecord(i).getTimeString());
             System.out.println(us.getTaskLog().getRecord(i).getContacts());
         }
-            
-    }
-    
+     
+             
+}
 }
