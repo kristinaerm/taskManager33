@@ -33,9 +33,10 @@ public class Loader {
     //тут устраивай, как тебе удобнее, потом скажешь
     //, User user
     public static void addUser(Document document,User us) throws FileNotFoundException, TransformerException {
-    //Получаем корневой элемент
+    
    for(int i=0;i<us.getTaskLog().getRecords().size();i++)
    {
+       //Получаем корневой элемент
       Node root = document.getDocumentElement();
       //создам новую задачу по элементно
       Element user1=document.createElement("user");
@@ -125,7 +126,7 @@ public class Loader {
 
     public static void clearDocument(Document document) {
         try {
-            Node root = document.getDocumentElement();
+           Node root = document.getDocumentElement();
             document.removeChild(root);
             writeDocument(document);
         } catch (FileNotFoundException ex) {

@@ -5,6 +5,8 @@
  */
 package taskmanager;
 
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
@@ -39,36 +41,70 @@ public class TaskManager {
      */
     public static void main(String[] args) throws ParseException, FileNotFoundException, SAXException, ParserConfigurationException, IOException, TransformerException {
         SimpleTaskManager frame = new SimpleTaskManager();
-        
+
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   
-                
+        frame.setTray();
 //        //запись и считывание из xml
 //        // Создается построитель документа
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 //            // Создается дерево DOM документа из файла
-           Document document = documentBuilder.parse("Catalog.xml");
-           LinkedList<Record>list=new LinkedList<Record>();
-           list.add(new Record("task1","tas","2015-10-22 22:10","18486"));
-           list.add(new Record("task2","tas","2015-10-22 22:10","18486"));
-           
-         User u=new User("1",null,null,list);
-            // Вызываем метод для добавления 
-            Loader.addUser(document,u);
-        
-            User us=Loader.readDocument(document);
-        for(int i=0;i<us.getTaskLog().getNumberOfRecords();i++)
-        {
-            System.out.println(us.getTaskLog().getRecord(i).getName());
-            System.out.println(us.getTaskLog().getRecord(i).getDescription());
-            System.out.println(us.getTaskLog().getRecord(i).getTimeString());
-            System.out.println(us.getTaskLog().getRecord(i).getContacts());
-        }
-    
-           
-}
+        Document document = documentBuilder.parse("Catalog.xml");
+        LinkedList<Record> list = new LinkedList<Record>();
+        list.add(new Record("task1", "tas", "2015-10-22 22:10", "18486"));
+        list.add(new Record("task2", "tas", "2015-10-22 22:10", "18486"));
+        frame.addWindowListener(new WindowListener() {
+            public void windowClosing(WindowEvent event) {
+
+                // [ТУТ  ДЕЙСТВИЯ ПО ЗАКРЫТИЮ]
+                  try {
+                    User u = new User("1", null, null, list);
+                    // Вызываем метод для записи,пока создала объект u
+                    Loader.addUser(document, u);
+                   
+                  
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (TransformerException ex) {
+                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.exit(0);
+            }
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
+      
+
+    }
+      
 }
