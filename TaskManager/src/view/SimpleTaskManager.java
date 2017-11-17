@@ -5,7 +5,24 @@
  */
 package view;
 
+import java.awt.AWTException;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import model.*;
 
@@ -292,6 +309,7 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         Transfer.tl = currentTaskLog;
         timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
     }
+    
     /**
      * @param args the command line arguments
      */
@@ -326,11 +344,74 @@ public class SimpleTaskManager extends javax.swing.JFrame{
                 new SimpleTaskManager().setVisible(true);
             }
         });
+        
     }
     String[] columnNames = {"№", "Название","Время и дата","Описание","Контакты"};
     private User currentUser;
     private TaskLog currentTaskLog;
     Timer timer = new Timer();
+   public void setTray()
+   {
+        try {
+            TrayIcon iconTray;
+            SystemTray sT = SystemTray.getSystemTray();
+            iconTray = new TrayIcon(ImageIO.read(new File("Ikonka.jpg")));
+            iconTray.setImageAutoSize(true);
+            iconTray.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent ev)         
+                {
+                     
+                    setVisible(true);
+                    setState(JFrame.NORMAL);
+                 
+
+                }
+       }); 
+       MouseListener mouS = new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent ev) { }
+      @Override
+      public void mouseEntered(MouseEvent ev) { }
+      @Override
+      public void mouseExited(MouseEvent ev) {  }
+      @Override
+      public void mousePressed(MouseEvent ev) { }
+      @Override
+      public void mouseReleased(MouseEvent ev) {}
+    };
+    iconTray.addMouseListener(mouS);
+    MouseMotionListener mouM = new MouseMotionListener() {
+      @Override
+      public void mouseDragged(MouseEvent ev) { }
+      //при наведении
+      @Override
+      public void mouseMoved(MouseEvent ev) {	  
+	
+	  iconTray.setToolTip("Двойной щелчок - развернуть");       
+      }
+   };
+    
+    iconTray.addMouseMotionListener(mouM);
+	addWindowStateListener(new WindowStateListener()
+    {
+      public void windowStateChanged(WindowEvent ev)
+      {
+        if(ev.getNewState() == JFrame.ICONIFIED)
+        {
+          setVisible(false);
+          
+        }
+      }
+    });    
+            
+                  sT.add(iconTray);
+        } catch (IOException ex) {
+            Logger.getLogger(SimpleTaskManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AWTException ex) {
+            Logger.getLogger(SimpleTaskManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
