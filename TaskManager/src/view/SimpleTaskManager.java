@@ -43,9 +43,9 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         initComponents();
         currentUser = user;
         currentTaskLog = user.getTaskLog();
-        //отрисовка списка задач
-        updateTable();
-        //вызов таймера и треда с оповещением должен быть в мэйне?
+        Transfer.table=jTable1;
+        Transfer.tl = currentTaskLog;
+        currentTaskLog.updateTable();
         updateNotification();
     }
 
@@ -271,7 +271,6 @@ public class SimpleTaskManager extends javax.swing.JFrame{
             rec = new Record(jTextField1.getText(),jTextField3.getText(),jTextField2.getText(),jTextField4.getText());
             currentTaskLog.addRecord(rec);
             //repaint
-            updateTable();
             //обновление таймера и треда с оповещением
             updateNotification();
         }
@@ -283,7 +282,6 @@ public class SimpleTaskManager extends javax.swing.JFrame{
             currentTaskLog.changeRecord(Integer.parseInt(jTextField6.getText()),jTextField1.getText(),jTextField2.getText(), jTextField3.getText(), jTextField4.getText());            
         }
         //repaint
-        updateTable();
         //обновление таймера и треда с оповещением
         updateNotification();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -294,19 +292,17 @@ public class SimpleTaskManager extends javax.swing.JFrame{
                 currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
             }
         //repaint
-        updateTable();
         //обновление таймера и треда с оповещением
         updateNotification();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void updateTable(){
-        jTable1 = new JTable(currentTaskLog.createData(), columnNames);
-    }
+//    private void updateTable(){
+//        jTable1 = new JTable(currentTaskLog.createData(), columnNames);
+//    }
     
     private void updateNotification(){
         timer.cancel();
-        int purge = timer.purge();
-        Transfer.tl = currentTaskLog;
+        int purge = timer.purge();        
         timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
     }
     
@@ -346,10 +342,15 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         });
         
     }
-    String[] columnNames = {"№", "Название","Время и дата","Описание","Контакты"};
+    
+    
+    //String[] columnNames = {"№", "Название","Время и дата","Описание","Контакты"};
     private User currentUser;
     private TaskLog currentTaskLog;
     Timer timer = new Timer();
+    
+    
+    
    public void setTray()
    {
         try {

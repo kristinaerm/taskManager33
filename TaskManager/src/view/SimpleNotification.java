@@ -51,6 +51,7 @@ public class SimpleNotification extends javax.swing.JFrame{
         jTextField4 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jTextField5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +84,7 @@ public class SimpleNotification extends javax.swing.JFrame{
             }
         });
 
-        jButton2.setText("Отложить на 10 минут");
+        jButton2.setText("Отложить на другое время:");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -110,8 +111,11 @@ public class SimpleNotification extends javax.swing.JFrame{
                             .addComponent(jTextField2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField5))))
                     .addComponent(jTextField4))
                 .addContainerGap())
         );
@@ -127,7 +131,8 @@ public class SimpleNotification extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -150,13 +155,19 @@ public class SimpleNotification extends javax.swing.JFrame{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Calendar instance = Calendar.getInstance();
-        instance.setTime(currentRec.getTime()); 
-        instance.add(Calendar.MINUTE,10);
-        currentRec.setTimeDate(instance.getTime());
+        currentRec.setTime(jTextField5.getText());
         //закрыть
     }//GEN-LAST:event_jButton2ActionPerformed
 
+//    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+//        // TODO add your handling code here:
+//        Calendar instance = Calendar.getInstance();
+//        instance.setTime(currentRec.getTime()); 
+//        instance.add(Calendar.MINUTE,10);
+//        currentRec.setTimeDate(instance.getTime());
+//        //закрыть
+//    }                                   
+    
     /**
      * @param args the command line arguments
      */
@@ -205,5 +216,6 @@ public class SimpleNotification extends javax.swing.JFrame{
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

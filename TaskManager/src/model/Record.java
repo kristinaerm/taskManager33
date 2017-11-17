@@ -8,6 +8,7 @@ package model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -26,6 +27,7 @@ public class Record implements Comparable{
         description = "";
         contacts = "";
         time = new Date();
+        id = UUID.randomUUID().toString();
     }
     
     public Record (String n, String d, String t, String c ){
@@ -37,6 +39,7 @@ public class Record implements Comparable{
         } catch (ParseException e) {
             time = new Date();
         }
+        id = UUID.randomUUID().toString();
     }
     
     public void setId(String i){

@@ -7,7 +7,10 @@ package model;
 
 import view.SimpleTaskManager;
 import java.util.LinkedList;
+import java.util.UUID;
+import javax.swing.JTable;
 import org.w3c.dom.Document;
+import view.Transfer;
 
 /**
  *
@@ -15,22 +18,25 @@ import org.w3c.dom.Document;
  */
 public class TaskLog {
     
+    private static final String[] COLUMN_NAMES = {"№", "Название","Время и дата","Описание","Контакты"};
     private LinkedList<Record> records;
-    private String id;
+    private final String id;
     
     
     
     public TaskLog (LinkedList<Record> rec){
-        //сформировать айдишник
+        id = UUID.randomUUID().toString();
         records = rec;
         sort();
     }
     
+    public void updateTable(){
+        Transfer.table = new JTable(this.createData(), COLUMN_NAMES);
+    }
+    
+    
     public String getId(){
         return id;
-    }
-    public void setId(String i){
-        id=i;
     }
     
     public LinkedList<Record> getRecords(){
@@ -68,6 +74,7 @@ public class TaskLog {
         if ((!con.equals(""))) {
             rec.setContacts(con);
         }
+        updateTable();
     }
     
     public Record getRecord (int n){
@@ -82,10 +89,12 @@ public class TaskLog {
     public void addRecord (Record rec){
         records.add(rec);
         sort();
+        updateTable();
     }
     
     public void deleteRecord (int n){
         records.remove(n);
+        updateTable();
     }  
     
     public void sort (){
