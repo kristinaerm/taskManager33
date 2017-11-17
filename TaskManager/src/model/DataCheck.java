@@ -60,13 +60,38 @@ public class DataCheck {
             int td = Integer.parseInt (curStringDate.substring (8, 10));
             int thh=Integer.parseInt (curStringDate.substring (11, 13));
           int tminut=Integer.parseInt (curStringDate.substring (14, 16));
-            
-        if(d<td&&m<tm&&y<ty&&hh<thh&&minut<tminut)
-        {
+            if(y>=ty)
+            {
+                if(m>=tm)
+                {
+                    if(d>=td)
+                    {
+                        if(hh>thh)
+                        {
+                            
+                                dateTimeFormatter.parse(time);
+                                return true;
+                            
+                        }else
+                        {
+                            if(hh==thh)
+                            {
+                                if(minut>=tminut)
+                                {
+                                    dateTimeFormatter.parse(time);
+                                    return true;
+                                }
+                            }
+                                
+                        }
+                        
+                    }
+                }
+            }
+
+         else {
+           
             return false;
-        } else {
-           dateTimeFormatter.parse(time);
-            return true;
         }
        
   

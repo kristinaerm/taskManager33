@@ -5,7 +5,10 @@
  */
 package view;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Timer;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import model.*;
 
@@ -292,6 +295,7 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         Transfer.tl = currentTaskLog;
         timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
     }
+    
     /**
      * @param args the command line arguments
      */
@@ -326,11 +330,13 @@ public class SimpleTaskManager extends javax.swing.JFrame{
                 new SimpleTaskManager().setVisible(true);
             }
         });
+        
     }
     String[] columnNames = {"№", "Название","Время и дата","Описание","Контакты"};
     private User currentUser;
     private TaskLog currentTaskLog;
     Timer timer = new Timer();
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

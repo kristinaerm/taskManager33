@@ -5,6 +5,8 @@
  */
 package taskmanager;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import view.SimpleTaskManager;
@@ -12,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -41,11 +45,12 @@ public class TaskManager {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //запись и считывание из xml
-        // Создается построитель документа
+   
+                
+//        //запись и считывание из xml
+//        // Создается построитель документа
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            // Создается дерево DOM документа из файла
+//            // Создается дерево DOM документа из файла
            Document document = documentBuilder.parse("Catalog.xml");
            LinkedList<Record>list=new LinkedList<Record>();
            list.add(new Record("task1","tas","2015-10-22 22:10","18486"));
@@ -64,6 +69,6 @@ public class TaskManager {
             System.out.println(us.getTaskLog().getRecord(i).getContacts());
         }
     
-             
+           
 }
 }
