@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import model.*;
 
 /**
@@ -42,11 +43,13 @@ public class SimpleTaskManager extends javax.swing.JFrame{
     public SimpleTaskManager(User user) {
         initComponents();
         currentUser = user;
+        jLabel1.setText(jLabel1.getText()+" "+user.getLogin());
         currentTaskLog = user.getTaskLog();
         Transfer.table=jTable1;
         Transfer.tl = currentTaskLog;
+        Transfer.model = model;
         currentTaskLog.updateTable();
-        updateNotification();
+        updateNotification();        
     }
 
 
@@ -87,14 +90,6 @@ public class SimpleTaskManager extends javax.swing.JFrame{
 
         jLabel7.setText("Добавить задачу:");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
-        jTextField3.setText("jTextField3");
-
-        jTextField4.setText("jTextField4");
-
         jButton1.setText("Добавить");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,8 +98,6 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         });
 
         jLabel8.setText("Удалить задачу №");
-
-        jTextField5.setText("jTextField5");
 
         jButton2.setText("Удалить");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -123,8 +116,6 @@ public class SimpleTaskManager extends javax.swing.JFrame{
 
         jLabel13.setText("№");
 
-        jTextField6.setText("jTextField6");
-
         jButton3.setText("Изменить");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,37 +125,7 @@ public class SimpleTaskManager extends javax.swing.JFrame{
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "№", "Название", "Дата и время", "Описание", "Контакты"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jTable1.setModel(model);
         jScrollPane2.setViewportView(jTable1);
 
         jScrollPane1.setViewportView(jScrollPane2);
@@ -176,38 +137,35 @@ public class SimpleTaskManager extends javax.swing.JFrame{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel7)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel11))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(51, 51, 51)
                                         .addComponent(jLabel13)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel7)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel12)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel9)
-                                                    .addComponent(jLabel10)
-                                                    .addComponent(jLabel11))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -217,7 +175,8 @@ public class SimpleTaskManager extends javax.swing.JFrame{
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 15, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,12 +212,13 @@ public class SimpleTaskManager extends javax.swing.JFrame{
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jLabel13)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3)))))
+                            .addComponent(jButton3))
+                        .addGap(0, 13, Short.MAX_VALUE))))
         );
 
         pack();
@@ -270,8 +230,7 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         if ((jTextField1.getText()!="")&&(jTextField2.getText()!="")&&(jTextField3.getText()!="")&&(jTextField4.getText()!="")){
             rec = new Record(jTextField1.getText(),jTextField3.getText(),jTextField2.getText(),jTextField4.getText());
             currentTaskLog.addRecord(rec);
-            //repaint
-            //обновление таймера и треда с оповещением
+            clear();
             updateNotification();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -281,8 +240,7 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         if (jTextField6.getText()!=""){
             currentTaskLog.changeRecord(Integer.parseInt(jTextField6.getText()),jTextField1.getText(),jTextField2.getText(), jTextField3.getText(), jTextField4.getText());            
         }
-        //repaint
-        //обновление таймера и треда с оповещением
+        clear();
         updateNotification();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -291,19 +249,31 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         if ((jTextField5.getText()!="")) {
                 currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
             }
-        //repaint
-        //обновление таймера и треда с оповещением
+        clear();
         updateNotification();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-//    private void updateTable(){
-//        jTable1 = new JTable(currentTaskLog.createData(), columnNames);
-//    }
     
     private void updateNotification(){
-        timer.cancel();
-        int purge = timer.purge();        
+        try{
+            timer.cancel();
+            int purge = timer.purge();
+        } catch(Exception e){
+            
+        }
+        timer = new Timer();
         timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
+        
+    }
+    
+    private void clear() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+            
     }
     
     /**
@@ -343,11 +313,6 @@ public class SimpleTaskManager extends javax.swing.JFrame{
         
     }
     
-    
-    //String[] columnNames = {"№", "Название","Время и дата","Описание","Контакты"};
-    private User currentUser;
-    private TaskLog currentTaskLog;
-    Timer timer = new Timer();
     
     
     
@@ -413,6 +378,20 @@ public class SimpleTaskManager extends javax.swing.JFrame{
             Logger.getLogger(SimpleTaskManager.class.getName()).log(Level.SEVERE, null, ex);
         }
    }
+   
+   
+   //String[] columnNames = {"№", "Название","Время и дата","Описание","Контакты"};
+    private User currentUser;
+    private TaskLog currentTaskLog;
+    Timer timer = new Timer();
+    DefaultTableModel model = new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "№", "Название", "Дата и время", "Описание", "Контакты"
+            });
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

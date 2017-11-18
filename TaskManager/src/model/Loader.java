@@ -99,7 +99,7 @@ public class Loader {
                 // Выводим информацию по каждому из найденных элементов
                 Node node = nodeList.item(i);
                   
-                System.out.println("Текущий элемент: " + node.getNodeName());
+                //System.out.println("Текущий элемент: " + node.getNodeName());
                 if (Node.ELEMENT_NODE == node.getNodeType()) {
                     Element element = (Element) node;
                 id=element.getElementsByTagName("id").item(0).getTextContent();

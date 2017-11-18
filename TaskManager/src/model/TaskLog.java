@@ -31,7 +31,12 @@ public class TaskLog {
     }
     
     public void updateTable(){
-        Transfer.table = new JTable(this.createData(), COLUMN_NAMES);
+        for (int i=0; i<Transfer.model.getRowCount(); i++){
+            Transfer.model.removeRow(i);
+        }
+        for (int i =0; i< records.size(); i++){
+            Transfer.model.addRow(new Object[]{i, getRecord(i).getName(),getRecord(i).getTimeString(), getRecord(i).getDescription(), getRecord(i).getContacts()});
+        }
     }
     
     

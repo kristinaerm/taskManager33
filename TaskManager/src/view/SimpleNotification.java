@@ -150,12 +150,17 @@ public class SimpleNotification extends javax.swing.JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         currentTaskLog.deleteRecord(0);
+        currentTaskLog.updateTable();
+        this.dispose();
         //закрыть
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        currentRec.setTime(jTextField5.getText());
+        Record newrec = new Record(currentRec.getName(), jTextField5.getText(), currentRec.getDescription(), currentRec.getContacts());
+        currentTaskLog.addRecord(newrec);
+        currentTaskLog.updateTable();
+        this.dispose();
         //закрыть
     }//GEN-LAST:event_jButton2ActionPerformed
 
