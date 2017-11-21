@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import model.TaskLog;
 
 /**
@@ -12,5 +14,8 @@ import model.TaskLog;
  * @author USER
  */
 public class Transfer {
+
     public static TaskLog tl;
+    public static JTable table;
+    public static DefaultTableModel model;
 }

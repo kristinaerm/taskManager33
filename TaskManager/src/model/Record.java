@@ -5,96 +5,134 @@
  */
 package model;
 
+import exceptions.InvalidRecordFieldException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
  * @author USER
  */
-public class Record implements Comparable{
+public class Record implements Comparable {
+
     private String id;
     private String name;
     private String description;
     private Date time;
-    private SimpleDateFormat dateTimeFormatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm"); 
+    public static final SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private String contacts;
-    
-    public Record(){
+
+    public Record() {
         name = "";
         description = "";
         contacts = "";
         time = new Date();
+        id = UUID.randomUUID().toString();
     }
-    
-    public Record (String n, String d, String t, String c ){
-        name = n;
-        description = d;
-        contacts = c;
-        try {
-            time = dateTimeFormatter.parse(t);
-        } catch (ParseException e) {
-            time = new Date();
+
+    public Record(String n, String d, String t, String c) throws InvalidRecordFieldException {
+        if (DataCheck.nameCheck(n)) {
+            if (DataCheck.descriptionCheck(d)) {
+                if (DataCheck.contactsCheck(c)) {
+                    if (DataCheck.timeCheck(t)) {
+                        name = n;
+                        description = d;
+                        contacts = c;
+                        try {
+                            time = dateTimeFormatter.parse(t);
+                        } catch (ParseException e) {
+                            time = new Date();
+                        }
+                        id = UUID.randomUUID().toString();
+                    } else {
+                        throw new InvalidRecordFieldException("Неправильный формат даты или прошедшее время. дд-мм-гггг чч:мм");
+                    }
+                } else {
+                    throw new InvalidRecordFieldException("Длина поля не должна превышать 15 символов.");
+                }
+            } else {
+                throw new InvalidRecordFieldException("Длина поля не должна превышать 30 символов.");
+            }
+        } else {
+            throw new InvalidRecordFieldException("Длина поля не должна превышать 15 символов.");
+        }
+
+    }
+
+    public void setId(String i) {
+        id = i;
+    }
+
+    public void setTime(String t) throws InvalidRecordFieldException {
+        if (DataCheck.timeCheck(t)) {
+            try {
+                time = dateTimeFormatter.parse(t);
+            } catch (ParseException e) {
+                time = new Date();
+            }
+        } else {
+            throw new InvalidRecordFieldException("Неправильный формат даты или прошедшее время. дд-мм-гггг чч:мм");
         }
     }
-    
-    public void setId(String i){
-        id=i;
-    }
-    
-    public void setTime(String s){
-        try {
-            time = dateTimeFormatter.parse(s);
-        } catch (ParseException e) {
-            time = new Date();
-        }
-    }
-    
-    public void setTimeDate(Date d){
+
+    public void setTimeDate(Date d) {
         time = d;
     }
 
-    public void setName(String n) {
-        name = n;
+    public void setName(String n) throws InvalidRecordFieldException {
+        if (DataCheck.nameCheck(n)) {
+            name = n;
+        } else {
+            throw new InvalidRecordFieldException("Длина поля не должна превышать 15 символов.");
+        }
     }
 
-    public void setDescription(String d) {
-        description = d;
+    public void setDescription(String d) throws InvalidRecordFieldException {
+        if (DataCheck.descriptionCheck(d)) {
+            description = d;
+        } else {
+            throw new InvalidRecordFieldException("Длина поля не должна превышать 30 символов.");
+        }
     }
 
-    public void setContacts(String c) {
-        contacts = c;
+    public void setContacts(String c) throws InvalidRecordFieldException {
+        if (DataCheck.contactsCheck(c)) {
+            contacts = c;
+        } else {
+            throw new InvalidRecordFieldException("Длина поля не должна превышать 15 символов.");
+        }
     }
-    
-    public String getId(){
+
+    public String getId() {
         return id;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    
-    public String getDescription(){
+
+    public String getDescription() {
         return description;
     }
-    
-    public String getContacts(){
+
+    public String getContacts() {
         return contacts;
     }
-    
-    public Date getTime(){
+
+    public Date getTime() {
         return time;
     }
-    
-    public String getTimeString(){
+
+    public String getTimeString() {
         return dateTimeFormatter.format(time);
     }
 
     @Override
     public int compareTo(Object t) {
-        Record r = (Record)t;
+        Record r = (Record) t;
         return time.compareTo(r.getTime());
     }
-    
+
 }

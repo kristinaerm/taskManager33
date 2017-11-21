@@ -13,17 +13,17 @@ import model.TaskLog;
  *
  * @author USER
  */
-public class NotificationTimerTask extends TimerTask{
+public class NotificationTimerTask extends TimerTask {
 
     @Override
     public void run() {
         SimpleNotification frame = new SimpleNotification(Transfer.tl);
-        
+
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-    
+
 }

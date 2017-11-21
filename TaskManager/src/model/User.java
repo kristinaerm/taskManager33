@@ -6,6 +6,7 @@
 package model;
 
 import java.util.LinkedList;
+import java.util.UUID;
 
 /**
  *
@@ -13,35 +14,33 @@ import java.util.LinkedList;
  */
 //  проверочка
 public class User {
+
     private String id;
     private final String login;
     private final String password;
     private TaskLog taskLog;
-    
-    public User(String i, String l, String p, LinkedList<Record> rec){
-        id = i;
+
+    //убрать строку передачи айдишника!!!
+    public User(String i, String l, String p, LinkedList<Record> rec) {
+        id = UUID.randomUUID().toString();;
         login = l;
         password = p;
         taskLog = new TaskLog(rec);
     }
-    
-    public String getId(){
+
+    public String getId() {
         return id;
     }
-    
-    public void setId (String i){
-        id=i;
-    }
 
-    public String getLogin(){
+    public String getLogin() {
         return login;
     }
-    
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    
-    public TaskLog getTaskLog(){
+
+    public TaskLog getTaskLog() {
         return taskLog;
     }
 

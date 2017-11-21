@@ -40,7 +40,23 @@ public class TaskManager {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ParseException, FileNotFoundException, SAXException, ParserConfigurationException, IOException, TransformerException {
-        SimpleTaskManager frame = new SimpleTaskManager();
+
+//        LinkedList<Record> list = new LinkedList<Record>();
+//        list.add(new Record("task1", "tas", "2017-11-19 17:31", "18486"));
+//        list.add(new Record("task2", "tas", "2017-11-19 17:30", "18486"));
+//        list.add(new Record("task3", "tas", "2017-11-19 17:32", "18486"));
+//        list.add(new Record("task4", "tas", "2017-11-18 17:43", "18486"));
+//        list.add(new Record("task5", "tas", "2017-11-18 17:44", "18486"));
+//        
+//        User u = new User("i", "login", "pass", list);
+//        //запись и считывание из xml
+//        // Создается построитель документа
+        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//            // Создается дерево DOM документа из файла
+        Document document = documentBuilder.parse("other.xml");
+        User u = Loader.readDocument(document);
+
+        SimpleTaskManager frame = new SimpleTaskManager(u, document);
 
         frame.setResizable(false);
         frame.pack();
@@ -48,24 +64,16 @@ public class TaskManager {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTray();
-//        //запись и считывание из xml
-//        // Создается построитель документа
-        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-//            // Создается дерево DOM документа из файла
-        Document document = documentBuilder.parse("Catalog.xml");
-        LinkedList<Record> list = new LinkedList<Record>();
-        list.add(new Record("task1", "tas", "2015-10-22 22:10", "18486"));
-        list.add(new Record("task2", "tas", "2015-10-22 22:10", "18486"));
+
         frame.addWindowListener(new WindowListener() {
             public void windowClosing(WindowEvent event) {
 
                 // [ТУТ  ДЕЙСТВИЯ ПО ЗАКРЫТИЮ]
-                  try {
-                    User u = new User("1", null, null, list);
+                try {
+//                    User u = new User("1", null, null, list);
                     // Вызываем метод для записи,пока создала объект u
                     Loader.addUser(document, u);
-                   
-                  
+
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (TransformerException ex) {
@@ -81,7 +89,7 @@ public class TaskManager {
 
             @Override
             public void windowClosed(WindowEvent e) {
-                
+
             }
 
             @Override
@@ -103,8 +111,7 @@ public class TaskManager {
 
             }
         });
-      
 
     }
-      
+
 }

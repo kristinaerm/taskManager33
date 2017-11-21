@@ -5,42 +5,51 @@
  */
 package model;
 
+import exceptions.InvalidRecordFieldException;
 import view.SimpleTaskManager;
 import java.util.LinkedList;
+import java.util.UUID;
+import javax.swing.JTable;
 import org.w3c.dom.Document;
+import view.Transfer;
 
 /**
  *
  * @author USER
  */
 public class TaskLog {
-    
+
+    private static final String[] COLUMN_NAMES = {"№", "Название", "Время и дата", "Описание", "Контакты"};
     private LinkedList<Record> records;
-    private String id;
-    
-    
-    
-    public TaskLog (LinkedList<Record> rec){
-        //сформировать айдишник
+    private final String id;
+
+    public TaskLog(LinkedList<Record> rec) {
+        id = UUID.randomUUID().toString();
         records = rec;
         sort();
     }
-    
-    public String getId(){
+
+    public void updateTable() {
+        for (int i = 0; i < Transfer.model.getRowCount(); i++) {
+            Transfer.model.removeRow(i);
+        }
+        for (int i = 0; i < records.size(); i++) {
+            Transfer.model.addRow(new Object[]{i, getRecord(i).getName(), getRecord(i).getTimeString(), getRecord(i).getDescription(), getRecord(i).getContacts()});
+        }
+    }
+
+    public String getId() {
         return id;
     }
-    public void setId(String i){
-        id=i;
-    }
-    
-    public LinkedList<Record> getRecords(){
+
+    public LinkedList<Record> getRecords() {
         return records;
     }
-    
-    public int getNumberOfRecords(){
+
+    public int getNumberOfRecords() {
         return records.size();
     }
-    
+
     public Object[][] createData() {
         Object[][] data = new Object[records.size()][5];
         for (int i = 0; i < records.size(); i++) {
@@ -52,8 +61,8 @@ public class TaskLog {
         }
         return data;
     }
-    
-    public void changeRecord (int n, String na, String ti, String des, String con){
+
+    public void changeRecord(int n, String na, String ti, String des, String con) throws InvalidRecordFieldException {
         Record rec = records.get(n);
         if ((!na.equals(""))) {
             rec.setName(na);
@@ -68,34 +77,32 @@ public class TaskLog {
         if ((!con.equals(""))) {
             rec.setContacts(con);
         }
+        updateTable();
     }
-    
-    public Record getRecord (int n){
 
+    public Record getRecord(int n) {
         return records.get(n);
-
-//        Record rec = records.get(n);
-//        return new Record(rec.getName(),rec.getDescription(), rec.getTimeString(), rec.getContacts());
-
     }
-    
-    public void addRecord (Record rec){
+
+    public void addRecord(Record rec) {
         records.add(rec);
         sort();
+        updateTable();
     }
-    
-    public void deleteRecord (int n){
+
+    public void deleteRecord(int n) {
         records.remove(n);
-    }  
-    
-    public void sort (){
+        updateTable();
+    }
+
+    public void sort() {
         Record temp = null;
         for (int j = 0; j < records.size(); j++) {
             for (int k = 0; k < records.size() - 1; k++) {
-                if (records.get(k).compareTo(records.get(k+1))==1) {
+                if (records.get(k).compareTo(records.get(k + 1)) == 1) {
                     temp = records.get(k);
-                    records.set(k, records.get(k+1));
-                    records.set(k+1, temp);
+                    records.set(k, records.get(k + 1));
+                    records.set(k + 1, temp);
                 }
             }
         }
