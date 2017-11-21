@@ -53,11 +53,12 @@ public class TaskManager {
 //        // Создается построитель документа
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 //            // Создается дерево DOM документа из файла
-        Document document = documentBuilder.parse("other.xml");
+        //Document document = documentBuilder.parse("Catalog.xml");
+           Document document = documentBuilder.parse("other.xml");
         User u = Loader.readDocument(document);
 
-        SimpleTaskManager frame = new SimpleTaskManager(u, document);
-
+     //   SimpleTaskManager frame = new SimpleTaskManager(u, document);
+      SimpleTaskManager frame = new SimpleTaskManager(u);
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -72,11 +73,22 @@ public class TaskManager {
                 try {
 //                    User u = new User("1", null, null, list);
                     // Вызываем метод для записи,пока создала объект u
-                    Loader.addUser(document, u);
+                   //Loader.clearDocument(document);
+                   DocumentBuilder documentBuilder1 = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//            // Создается дерево DOM документа из файла
+                  Document document1 = documentBuilder.parse("Catalog.xml");
+           
+                    Loader.addUser(document1, u);
 
-                } catch (FileNotFoundException ex) {
+              } catch (FileNotFoundException ex) {
+                   Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
+               } catch (TransformerException ex) {
+                   Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
+              } catch (ParserConfigurationException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (TransformerException ex) {
+                } catch (SAXException ex) {
+                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.exit(0);

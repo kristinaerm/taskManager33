@@ -24,9 +24,11 @@ public class TaskLog {
     private final String id;
 
     public TaskLog(LinkedList<Record> rec) {
+        
         id = UUID.randomUUID().toString();
         records = rec;
         sort();
+        
     }
 
     public void updateTable() {
@@ -81,6 +83,7 @@ public class TaskLog {
     }
 
     public Record getRecord(int n) {
+       
         return records.get(n);
     }
 
@@ -97,6 +100,7 @@ public class TaskLog {
 
     public void sort() {
         Record temp = null;
+
         for (int j = 0; j < records.size(); j++) {
             for (int k = 0; k < records.size() - 1; k++) {
                 if (records.get(k).compareTo(records.get(k + 1)) == 1) {
@@ -106,5 +110,7 @@ public class TaskLog {
                 }
             }
         }
+        }
     }
-}
+    
+

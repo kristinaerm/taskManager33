@@ -16,6 +16,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -27,6 +30,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 //ED3ED3ED3ED3ED3D3ED3ED
 
 /**
@@ -87,7 +91,7 @@ public class Loader {
         }
     }
 
-    public static User readDocument(Document document) {
+    public static User readDocument(Document document) throws ParserConfigurationException, SAXException, IOException {
         String id = null;
         String name1 = null;
         String description1 = null;
@@ -97,7 +101,7 @@ public class Loader {
         LinkedList<Record> list = new LinkedList<Record>();
 
         NodeList nodeList = document.getElementsByTagName("user");
-
+       
         for (int i = 0; i < nodeList.getLength(); i++) {
             // Выводим информацию по каждому из найденных элементов
             Node node = nodeList.item(i);
@@ -145,7 +149,11 @@ public class Loader {
             } catch (InvalidRecordFieldException ex) {}
             list.add(rec);
         }
-        return new User(id, null, null, list);
+         return new User(id, null, null, list);
+      
+       
+
+        
     }
 
     public static void writeDocument(Document document) throws TransformerConfigurationException, FileNotFoundException, TransformerException {
@@ -153,19 +161,22 @@ public class Loader {
         DOMSource source = new DOMSource(document);
         FileOutputStream fos = new FileOutputStream("other.xml");
         StreamResult result = new StreamResult(fos);
+        
         tr.transform(source, result);
+        
     }
 
-    public static void clearDocument(Document document) {
-        try {
+    public static void clearDocument(Document document) throws FileNotFoundException, TransformerException {
+     
             Node root = document.getDocumentElement();
-            document.removeChild(root);
-            writeDocument(document);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(Loader.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            NodeList list = root.getChildNodes();
+            for(int i = 0; i < list.getLength(); i++)
+            {
+                Node node = list.item(i);
+               
+                    root.removeChild(node);
+            }
+       writeDocument(document);
     }
 
 }
