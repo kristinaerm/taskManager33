@@ -5,7 +5,10 @@
  */
 package view;
 
+import exceptions.InvalidRecordFieldException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Record;
 import model.TaskLog;
 
@@ -13,7 +16,7 @@ import model.TaskLog;
  *
  * @author USER
  */
-public class SimpleNotification extends javax.swing.JFrame{
+public class SimpleNotification extends javax.swing.JFrame {
 
     /**
      * Creates new form NotificationInterface
@@ -21,7 +24,7 @@ public class SimpleNotification extends javax.swing.JFrame{
     public SimpleNotification() {
         initComponents();
     }
-    
+
     public SimpleNotification(TaskLog tl) {
         initComponents();
         currentTaskLog = tl;
@@ -157,10 +160,16 @@ public class SimpleNotification extends javax.swing.JFrame{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Record newrec = new Record(currentRec.getName(), jTextField5.getText(), currentRec.getDescription(), currentRec.getContacts());
-        currentTaskLog.addRecord(newrec);
-        currentTaskLog.updateTable();
-        this.dispose();
+        Record newrec;
+        try {
+            newrec = new Record(currentRec.getName(), jTextField5.getText(), currentRec.getDescription(), currentRec.getContacts());
+            currentTaskLog.addRecord(newrec);
+            currentTaskLog.updateTable();
+            this.dispose();
+        } catch (InvalidRecordFieldException ex) {
+            jTextField1.setText(ex.getMessage());
+        }
+
         //закрыть
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -172,7 +181,6 @@ public class SimpleNotification extends javax.swing.JFrame{
 //        currentRec.setTimeDate(instance.getTime());
 //        //закрыть
 //    }                                   
-    
     /**
      * @param args the command line arguments
      */
