@@ -3,9 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/USER/Documents/GitHub/taskManager33/TaskManager/src/view/SimpleNotification.java</file>
             <file>file:/C:/Users/USER/Documents/GitHub/taskManager33/TaskManager/src/taskmanager/TaskManager.java</file>
             <file>file:/C:/Users/USER/Documents/GitHub/taskManager33/TaskManager/src/model/Record.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/Кристина/Documents/GitHub/taskManager33/TaskManager/src/taskmanager/TaskManager.java</file>
+=======
+            <file>file:/C:/Users/USER/Documents/GitHub/taskManager33/TaskManager/src/view/SimpleTaskManager.java</file>
+>>>>>>> 18c93f6eb92641cf38442430b18e161260457369
+>>>>>>> d89418dab737c253af851662abdfd31b7119ad21
         </group>
     </open-files>
 </project-private>
