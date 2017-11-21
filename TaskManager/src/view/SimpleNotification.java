@@ -162,7 +162,7 @@ public class SimpleNotification extends javax.swing.JFrame {
         // TODO add your handling code here:
         Record newrec;
         try {
-            newrec = new Record(currentRec.getName(), jTextField5.getText(), currentRec.getDescription(), currentRec.getContacts());
+            newrec = new Record(currentRec.getName(), currentRec.getDescription(), jTextField5.getText(), currentRec.getContacts());
             currentTaskLog.addRecord(newrec);
             currentTaskLog.updateTable();
             this.dispose();

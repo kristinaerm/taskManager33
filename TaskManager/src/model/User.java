@@ -27,6 +27,10 @@ public class User {
         password = p;
         taskLog = new TaskLog(rec);
     }
+    
+    public void setTaskLog(TaskLog t){
+        taskLog =t;
+    }
 
     public String getId() {
         return id;
