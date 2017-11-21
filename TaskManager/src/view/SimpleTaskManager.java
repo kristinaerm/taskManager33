@@ -419,11 +419,11 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         }
     }
 
-    private Document currentDocument;
-    private User currentUser;
-    private TaskLog currentTaskLog;
-    Timer timer = new Timer();
-    DefaultTableModel model = new javax.swing.table.DefaultTableModel(
+    private static Document currentDocument;
+    private static User currentUser;
+    private static TaskLog currentTaskLog;
+    private static Timer timer = new Timer();
+    private static DefaultTableModel model = new javax.swing.table.DefaultTableModel(
             new Object[][]{
                 {null, null, null, null, null}
             },
