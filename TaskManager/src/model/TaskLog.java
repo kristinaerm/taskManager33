@@ -65,20 +65,20 @@ public class TaskLog {
     }
 
     public void changeRecord(int n, String na, String ti, String des, String con) throws InvalidRecordFieldException {
-        Record rec = records.get(n);
+        records.get(n);
         if ((!na.equals(""))) {
-            rec.setName(na);
+            records.get(n).setName(na);
         }
         if ((!ti.equals(""))) {
-            rec.setTime(ti);
-            sort();
+            records.get(n).setTime(ti);            
         }
         if ((!des.equals(""))) {
-            rec.setDescription(des);
+            records.get(n).setDescription(des);
         }
         if ((!con.equals(""))) {
-            rec.setContacts(con);
+            records.get(n).setContacts(con);
         }
+        sort();
         updateTable();
     }
 

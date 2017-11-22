@@ -160,10 +160,8 @@ public class SimpleNotification extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Record newrec;
         try {
-            newrec = new Record(currentRec.getName(), currentRec.getDescription(), jTextField5.getText(), currentRec.getContacts());
-            currentTaskLog.addRecord(newrec);
+            currentTaskLog.changeRecord(0, currentRec.getName(), jTextField5.getText(), currentRec.getDescription(), currentRec.getContacts());
             currentTaskLog.updateTable();
             this.dispose();
         } catch (InvalidRecordFieldException ex) {
