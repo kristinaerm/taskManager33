@@ -57,6 +57,7 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         Transfer.table = jTable1;
         Transfer.tl = currentTaskLog;
         Transfer.model = model;
+        clear();
         currentTaskLog.updateTable();
         updateNotification();
     }
@@ -284,24 +285,26 @@ public class SimpleTaskManager extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:        
-        if (jTextField6.getText() != "") {
+        if (!"".equals(jTextField6.getText())) {
             try {
                 currentTaskLog.changeRecord(Integer.parseInt(jTextField6.getText()), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText());
+                clear();
+                updateNotification();
             } catch (InvalidRecordFieldException ex) {
                 jTextField1.setText(ex.getMessage());
             }
         }
-        clear();
-        updateNotification();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if ((jTextField5.getText() != "")) {
+        if ((!"".equals(jTextField5.getText()))) {
             currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
+            clear();
+            updateNotification();
         }
-        clear();
-        updateNotification();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
