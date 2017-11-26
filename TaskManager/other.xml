@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?><INFO>
 <user><id>0be8f479-601e-4ab2-8895-0ecde8a9c1b2</id><name>Название:</name><name1>ЙЦУ</name1><description>Описание:</description><description1>УВЫВ</description1><timedate>время(дата)оповещения:</timedate><timedate1>2017-11-22 00:15</timedate1><contacts>Контакты:</contacts><contacts1>ЙВУЙА</contacts1></user></INFO>
 
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><INFO>
+<user><id>b57c1436-fd70-4dfc-8537-4270fe9acb18</id><name>Название:</name><name1>bbb</name1><description>Описание:</description><description1>gh</description1><timedate>время(дата)оповещения:</timedate><timedate1>2017-11-22 23:08</timedate1><contacts>Контакты:</contacts><contacts1>dgh</contacts1></user></INFO>
+>>>>>>> 53ef39371d613f87788b642fefaeb3f338022ed0
