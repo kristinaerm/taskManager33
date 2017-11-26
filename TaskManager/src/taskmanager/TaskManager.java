@@ -73,8 +73,7 @@ public class TaskManager {
                 try {
 //                    User u = new User("1", null, null, list);
                     // Вызываем метод для записи,пока создала объект u
-                   //Loader.clearDocument(document);
-                   DocumentBuilder documentBuilder1 = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                  
 //            // Создается дерево DOM документа из файла
                   Document document1 = documentBuilder.parse("Catalog.xml");
            
@@ -84,9 +83,7 @@ public class TaskManager {
                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
                } catch (TransformerException ex) {
                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
-              } catch (ParserConfigurationException ex) {
-                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SAXException ex) {
+              } catch (SAXException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
