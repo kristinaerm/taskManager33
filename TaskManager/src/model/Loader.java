@@ -42,7 +42,8 @@ public class Loader {
     //тут устраивай, как тебе удобнее, потом скажешь
     //, User user
     public static void addUser(Document document, User us) throws FileNotFoundException, TransformerException {
-
+         if(us.getTaskLog().getRecords().size()>0)
+         {
         for (int i = 0; i < us.getTaskLog().getRecords().size(); i++) {
             //Получаем корневой элемент
             Node root = document.getDocumentElement();
@@ -89,6 +90,9 @@ public class Loader {
             // Записываем XML в файл
             writeDocument(document);
         }
+         }else{
+        writeDocument(document);
+         }
     }
 
     public static User readDocument(Document document) throws ParserConfigurationException, SAXException, IOException {

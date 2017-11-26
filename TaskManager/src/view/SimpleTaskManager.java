@@ -323,9 +323,11 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
+        if(currentTaskLog.getNumberOfRecords()>0)
+        {
         timer = new Timer();
         timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
-
+        }
     }
 
     private void clear() {

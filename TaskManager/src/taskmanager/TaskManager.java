@@ -57,8 +57,8 @@ public class TaskManager {
            Document document = documentBuilder.parse("other.xml");
         User u = Loader.readDocument(document);
 
-     //   SimpleTaskManager frame = new SimpleTaskManager(u, document);
-      SimpleTaskManager frame = new SimpleTaskManager(u);
+       SimpleTaskManager frame = new SimpleTaskManager(u, document);
+    //  SimpleTaskManager frame = new SimpleTaskManager(u);
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);
