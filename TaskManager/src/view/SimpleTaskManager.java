@@ -284,25 +284,38 @@ public class SimpleTaskManager extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:        
-        if (!"".equals(jTextField6.getText())) {
-            try {
-                currentTaskLog.changeRecord(Integer.parseInt(jTextField6.getText()), jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText());
-                clear();
-                updateNotification();
-            } catch (InvalidRecordFieldException ex) {
-                jTextField1.setText(ex.getMessage());
+
+        try {
+            if (!"".equals(jTextField6.getText())) {                
+                if (Integer.parseInt(jTextField6.getText()) < currentTaskLog.getNumberOfRecords()) {
+                    ChangeRecord frame = new ChangeRecord(Integer.parseInt(jTextField6.getText()));
+                    frame.setResizable(false);
+                    frame.pack();
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    clear();
+                    updateNotification();
+                }
             }
+            clear();
+        } catch (Exception e) {
+            clear();
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if ((!"".equals(jTextField5.getText()))) {
-            currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
+        try {
+            if ((!"".equals(jTextField5.getText()))&&(Integer.parseInt(jTextField5.getText())<currentTaskLog.getNumberOfRecords())) {
+                currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
+                clear();
+                updateNotification();
+            }
             clear();
-            updateNotification();
+        } catch (Exception e) {
+            jTextField5.setText("");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
