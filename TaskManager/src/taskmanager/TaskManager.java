@@ -5,6 +5,7 @@
  */
 package taskmanager;
 
+import interfaces.Loader;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.WindowEvent;
@@ -24,7 +25,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import model.DataCheck;
-import model.Loader;
+import model.LoaderXML;
+import model.Loaders;
 import model.Record;
 import model.User;
 import org.w3c.dom.Document;
@@ -55,10 +57,12 @@ public class TaskManager {
 //            // Создается дерево DOM документа из файла
         //Document document = documentBuilder.parse("Catalog.xml");
            Document document = documentBuilder.parse("other.xml");
-        User u = Loader.readDocument(document);
+           Loaders load=new Loaders();
+           load.setLoaders('X');
+           User u = load.readDocument(document);
 
-     //   SimpleTaskManager frame = new SimpleTaskManager(u, document);
-      SimpleTaskManager frame = new SimpleTaskManager(u);
+       SimpleTaskManager frame = new SimpleTaskManager(u, document);
+    //  SimpleTaskManager frame = new SimpleTaskManager(u);
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -73,22 +77,19 @@ public class TaskManager {
                 try {
 //                    User u = new User("1", null, null, list);
                     // Вызываем метод для записи,пока создала объект u
-                   //Loader.clearDocument(document);
-                   DocumentBuilder documentBuilder1 = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                  
 //            // Создается дерево DOM документа из файла
                   Document document1 = documentBuilder.parse("Catalog.xml");
            
-                    Loader.addUser(document1, u);
+                    load.addUser(document1, u);
 
               } catch (FileNotFoundException ex) {
                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
-               } catch (TransformerException ex) {
-                   Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
-              } catch (ParserConfigurationException ex) {
-                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SAXException ex) {
+               } catch (SAXException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
+                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (TransformerException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 System.exit(0);

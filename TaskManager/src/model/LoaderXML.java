@@ -6,6 +6,7 @@
 package model;
 
 import exceptions.InvalidRecordFieldException;
+import interfaces.Loader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -37,12 +38,17 @@ import org.xml.sax.SAXException;
  *
  * @author USER
  */
-public class Loader {
+public class LoaderXML implements Loader{
+public LoaderXML()
+{
+    
+}
 
-    //тут устраивай, как тебе удобнее, потом скажешь
-    //, User user
-    public static void addUser(Document document, User us) throws FileNotFoundException, TransformerException {
-
+    
+@Override
+   public  void addUser(Document document, User us) throws FileNotFoundException, TransformerException {
+         if(us.getTaskLog().getRecords().size()>0)
+         {
         for (int i = 0; i < us.getTaskLog().getRecords().size(); i++) {
             //Получаем корневой элемент
             Node root = document.getDocumentElement();
@@ -89,9 +95,13 @@ public class Loader {
             // Записываем XML в файл
             writeDocument(document);
         }
+         }else{
+        writeDocument(document);
+         }
     }
 
-    public static User readDocument(Document document) throws ParserConfigurationException, SAXException, IOException {
+@Override
+    public  User readDocument(Document document) throws ParserConfigurationException, SAXException, IOException {
         String id = null;
         String name1 = null;
         String description1 = null;
@@ -156,7 +166,8 @@ public class Loader {
         
     }
 
-    public static void writeDocument(Document document) throws TransformerConfigurationException, FileNotFoundException, TransformerException {
+@Override
+    public void writeDocument(Document document) throws TransformerConfigurationException, FileNotFoundException, TransformerException {
         Transformer tr = TransformerFactory.newInstance().newTransformer();
         DOMSource source = new DOMSource(document);
         FileOutputStream fos = new FileOutputStream("other.xml");
@@ -166,17 +177,6 @@ public class Loader {
         
     }
 
-    public static void clearDocument(Document document) throws FileNotFoundException, TransformerException {
-     
-            Node root = document.getDocumentElement();
-            NodeList list = root.getChildNodes();
-            for(int i = 0; i < list.getLength(); i++)
-            {
-                Node node = list.item(i);
-               
-                    root.removeChild(node);
-            }
-       writeDocument(document);
-    }
+   
 
 }

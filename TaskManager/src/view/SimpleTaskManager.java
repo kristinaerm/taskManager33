@@ -61,22 +61,22 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         currentTaskLog.updateTable();
         updateNotification();
     }
- public SimpleTaskManager(User user) throws ParserConfigurationException, SAXException, IOException {
-        initComponents();
-        currentUser = user;
-        jLabel1.setText(jLabel1.getText() + " " + user.getLogin());
-        // Создается построитель документа
-        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-           // Создается дерево DOM документа из файла
-        currentDocument = documentBuilder.parse("other.xml");
-        currentUser = Loader.readDocument(currentDocument);
-        currentTaskLog = user.getTaskLog();
-        Transfer.table = jTable1;
-        Transfer.tl = currentTaskLog;
-        Transfer.model = model;
-        currentTaskLog.updateTable();
-        updateNotification();
-    }
+// public SimpleTaskManager(User user) throws ParserConfigurationException, SAXException, IOException {
+//        initComponents();
+//        currentUser = user;
+//        jLabel1.setText(jLabel1.getText() + " " + user.getLogin());
+//        // Создается построитель документа
+//        DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+//           // Создается дерево DOM документа из файла
+//        currentDocument = documentBuilder.parse("other.xml");
+//        currentUser = LoaderXML.readDocument(currentDocument);
+//        currentTaskLog = user.getTaskLog();
+//        Transfer.table = jTable1;
+//        Transfer.tl = currentTaskLog;
+//        Transfer.model = model;
+//        currentTaskLog.updateTable();
+//        updateNotification();
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -310,7 +310,9 @@ public class SimpleTaskManager extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
             // TODO add your handling code here:
-            Loader.addUser(currentDocument, currentUser);
+            Loaders load=new Loaders();
+           load.setLoaders('X');
+            load.addUser(currentDocument, currentUser);
         } catch (FileNotFoundException | TransformerException ex) {
 
         }
@@ -323,9 +325,11 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
+        if(currentTaskLog.getNumberOfRecords()>0)
+        {
         timer = new Timer();
         timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
-
+        }
     }
 
     private void clear() {

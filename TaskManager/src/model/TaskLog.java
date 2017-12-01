@@ -83,7 +83,8 @@ public class TaskLog {
     }
 
     public Record getRecord(int n) {
-       
+              
+      
         return records.get(n);
     }
 
@@ -95,6 +96,7 @@ public class TaskLog {
 
     public void deleteRecord(int n) {
         records.remove(n);
+        
         updateTable();
     }
 
