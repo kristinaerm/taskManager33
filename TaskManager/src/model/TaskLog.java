@@ -24,11 +24,11 @@ public class TaskLog {
     private final String id;
 
     public TaskLog(LinkedList<Record> rec) {
-        
+
         id = UUID.randomUUID().toString();
         records = rec;
         sort();
-        
+
     }
 
     public void updateTable() {
@@ -70,7 +70,7 @@ public class TaskLog {
             records.get(n).setName(na);
         }
         if ((!ti.equals(""))) {
-            records.get(n).setTime(ti);            
+            records.get(n).setTime(ti);
         }
         if ((!des.equals(""))) {
             records.get(n).setDescription(des);
@@ -83,8 +83,7 @@ public class TaskLog {
     }
 
     public Record getRecord(int n) {
-              
-      
+
         return records.get(n);
     }
 
@@ -96,7 +95,7 @@ public class TaskLog {
 
     public void deleteRecord(int n) {
         records.remove(n);
-        
+
         updateTable();
     }
 
@@ -112,7 +111,5 @@ public class TaskLog {
                 }
             }
         }
-        }
     }
-    
-
+}

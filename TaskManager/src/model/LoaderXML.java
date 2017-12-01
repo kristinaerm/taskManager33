@@ -38,70 +38,68 @@ import org.xml.sax.SAXException;
  *
  * @author USER
  */
-public class LoaderXML implements Loader{
-public LoaderXML()
-{
-    
-}
+public class LoaderXML implements Loader {
 
-    
-@Override
-   public  void addUser(Document document, User us) throws FileNotFoundException, TransformerException {
-         if(us.getTaskLog().getRecords().size()>0)
-         {
-        for (int i = 0; i < us.getTaskLog().getRecords().size(); i++) {
-            //Получаем корневой элемент
-            Node root = document.getDocumentElement();
-            //создам новую задачу по элементно
-            Element user1 = document.createElement("user");
-            //<name>
-            Element id = document.createElement("id");
-            id.setTextContent(us.getId());
-            Element name = document.createElement("name");
-            //установка значения текста внутри тегов
-            name.setTextContent("Название:");
+    public LoaderXML() {
 
-            Element name1 = document.createElement("name1");
-            name1.setTextContent(us.getTaskLog().getRecord(i).getName());
-            Element description = document.createElement("description");
-            description.setTextContent("Описание:");
-
-            Element description1 = document.createElement("description1");
-            description1.setTextContent(us.getTaskLog().getRecord(i).getDescription());
-            Element timedate = document.createElement("timedate");
-            timedate.setTextContent("время(дата)оповещения:");
-
-            Element timedate1 = document.createElement("timedate1");
-            timedate1.setTextContent(us.getTaskLog().getRecord(i).getTimeString());
-            Element contacts = document.createElement("contacts");
-            contacts.setTextContent("Контакты:");
-
-            Element contacts1 = document.createElement("contacts1");
-            contacts1.setTextContent(us.getTaskLog().getRecord(i).getContacts());
-            //добавление внутренних элементов в элемент <Info>
-            user1.appendChild(id);
-            user1.appendChild(name);
-            user1.appendChild(name1);
-            user1.appendChild(description);
-            user1.appendChild(description1);
-            user1.appendChild(timedate);
-            user1.appendChild(timedate1);
-            user1.appendChild(contacts);
-            user1.appendChild(contacts1);
-
-            //добаляем инфо в корневой элемент
-            root.appendChild(user1);
-
-            // Записываем XML в файл
-            writeDocument(document);
-        }
-         }else{
-        writeDocument(document);
-         }
     }
 
-@Override
-    public  User readDocument(Document document) throws ParserConfigurationException, SAXException, IOException {
+    @Override
+    public void addUser(Document document, User us) throws FileNotFoundException, TransformerException {
+        if (us.getTaskLog().getRecords().size() > 0) {
+            for (int i = 0; i < us.getTaskLog().getRecords().size(); i++) {
+                //Получаем корневой элемент
+                Node root = document.getDocumentElement();
+                //создам новую задачу по элементно
+                Element user1 = document.createElement("user");
+                //<name>
+                Element id = document.createElement("id");
+                id.setTextContent(us.getId());
+                Element name = document.createElement("name");
+                //установка значения текста внутри тегов
+                name.setTextContent("Название:");
+
+                Element name1 = document.createElement("name1");
+                name1.setTextContent(us.getTaskLog().getRecord(i).getName());
+                Element description = document.createElement("description");
+                description.setTextContent("Описание:");
+
+                Element description1 = document.createElement("description1");
+                description1.setTextContent(us.getTaskLog().getRecord(i).getDescription());
+                Element timedate = document.createElement("timedate");
+                timedate.setTextContent("время(дата)оповещения:");
+
+                Element timedate1 = document.createElement("timedate1");
+                timedate1.setTextContent(us.getTaskLog().getRecord(i).getTimeString());
+                Element contacts = document.createElement("contacts");
+                contacts.setTextContent("Контакты:");
+
+                Element contacts1 = document.createElement("contacts1");
+                contacts1.setTextContent(us.getTaskLog().getRecord(i).getContacts());
+                //добавление внутренних элементов в элемент <Info>
+                user1.appendChild(id);
+                user1.appendChild(name);
+                user1.appendChild(name1);
+                user1.appendChild(description);
+                user1.appendChild(description1);
+                user1.appendChild(timedate);
+                user1.appendChild(timedate1);
+                user1.appendChild(contacts);
+                user1.appendChild(contacts1);
+
+                //добаляем инфо в корневой элемент
+                root.appendChild(user1);
+
+                // Записываем XML в файл
+                writeDocument(document);
+            }
+        } else {
+            writeDocument(document);
+        }
+    }
+
+    @Override
+    public User readDocument(Document document) throws ParserConfigurationException, SAXException, IOException {
         String id = null;
         String name1 = null;
         String description1 = null;
@@ -111,42 +109,41 @@ public LoaderXML()
         LinkedList<Record> list = new LinkedList<Record>();
 
         NodeList nodeList = document.getElementsByTagName("user");
-       
+
         for (int i = 0; i < nodeList.getLength(); i++) {
             // Выводим информацию по каждому из найденных элементов
             Node node = nodeList.item(i);
 
             //System.out.println("Текущий элемент: " + node.getNodeName());
-            
             if (Node.ELEMENT_NODE == node.getNodeType()) {
                 Element element = (Element) node;
                 id = element.getElementsByTagName("id").item(0).getTextContent();
                 name1 = element.getElementsByTagName("name1").item(0).getTextContent();
                 if (!DataCheck.nameCheck(name1)) {
-                    String n="";
-                    for (int k=0; k<15; k++) {
-                        n+=name1.charAt(k);
+                    String n = "";
+                    for (int k = 0; k < 15; k++) {
+                        n += name1.charAt(k);
                     }
                     name1 = n;
                 }
                 description1 = element.getElementsByTagName("description1").item(0).getTextContent();
                 if (!DataCheck.descriptionCheck(description1)) {
-                    String n="";
-                    for (int k=0; k<30; k++) {
-                        n+=description1.charAt(k);
+                    String n = "";
+                    for (int k = 0; k < 30; k++) {
+                        n += description1.charAt(k);
                     }
                     description1 = n;
                 }
                 timedate1 = element.getElementsByTagName("timedate1").item(0).getTextContent();
-                if (!DataCheck.timeCheck(timedate1)){
+                if (!DataCheck.timeCheck(timedate1)) {
                     Date date = new Date();
                     timedate1 = dateTimeFormatter.format(date);
-                }                
+                }
                 contacts1 = element.getElementsByTagName("contacts1").item(0).getTextContent();
-                if (!DataCheck.contactsCheck(contacts1)){
-                    String n="";
-                    for (int k=0; k<15; k++) {
-                        n+=contacts1.charAt(k);
+                if (!DataCheck.contactsCheck(contacts1)) {
+                    String n = "";
+                    for (int k = 0; k < 15; k++) {
+                        n += contacts1.charAt(k);
                     }
                     contacts1 = n;
                 }
@@ -156,27 +153,23 @@ public LoaderXML()
             Record rec = null;
             try {
                 rec = new Record(name1, description1, timedate1, contacts1);
-            } catch (InvalidRecordFieldException ex) {}
+            } catch (InvalidRecordFieldException ex) {
+            }
             list.add(rec);
         }
-         return new User(id, null, null, list);
-      
-       
+        return new User(id, null, null, list);
 
-        
     }
 
-@Override
+    @Override
     public void writeDocument(Document document) throws TransformerConfigurationException, FileNotFoundException, TransformerException {
         Transformer tr = TransformerFactory.newInstance().newTransformer();
         DOMSource source = new DOMSource(document);
         FileOutputStream fos = new FileOutputStream("other.xml");
         StreamResult result = new StreamResult(fos);
-        
-        tr.transform(source, result);
-        
-    }
 
-   
+        tr.transform(source, result);
+
+    }
 
 }

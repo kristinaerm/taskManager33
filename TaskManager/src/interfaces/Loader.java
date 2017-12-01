@@ -19,6 +19,7 @@ import org.xml.sax.SAXException;
  * @author Кристина
  */
 public interface Loader {
+
     public void addUser(Document document, User us) throws FileNotFoundException, TransformerException;
 
     public User readDocument(Document document) throws ParserConfigurationException, SAXException, IOException;

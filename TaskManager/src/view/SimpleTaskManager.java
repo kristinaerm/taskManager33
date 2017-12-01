@@ -310,8 +310,8 @@ public class SimpleTaskManager extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
             // TODO add your handling code here:
-            Loaders load=new Loaders();
-           load.setLoaders('X');
+            Loaders load = new Loaders();
+            load.setLoaders('X');
             load.addUser(currentDocument, currentUser);
         } catch (FileNotFoundException | TransformerException ex) {
 
@@ -325,10 +325,9 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         } catch (Exception e) {
 
         }
-        if(currentTaskLog.getNumberOfRecords()>0)
-        {
-        timer = new Timer();
-        timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
+        if (currentTaskLog.getNumberOfRecords() > 0) {
+            timer = new Timer();
+            timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
         }
     }
 

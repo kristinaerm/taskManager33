@@ -18,11 +18,11 @@ import org.xml.sax.SAXException;
  *
  * @author Кристина
  */
-public class LoaderSQL implements Loader{
+public class LoaderSQL implements Loader {
 
     @Override
     public void addUser(Document document, User us) throws FileNotFoundException, TransformerException {
-       
+
     }
 
     @Override
@@ -34,5 +34,5 @@ public class LoaderSQL implements Loader{
     public void writeDocument(Document document) throws TransformerConfigurationException, FileNotFoundException, TransformerException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

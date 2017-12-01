@@ -19,32 +19,30 @@ import org.xml.sax.SAXException;
  * @author Кристина
  */
 public class Loaders implements Loader {
-    private  Loader loader;
-    public  void setLoaders(char ch)
-    {
-        if(ch=='X'||ch=='x')
-        {
-            loader=new LoaderXML();
-        }else
-            if(ch=='S'||ch=='s')
-            {
-                loader=new LoaderSQL();
-            }
+
+    private Loader loader;
+
+    public void setLoaders(char ch) {
+        if (ch == 'X' || ch == 'x') {
+            loader = new LoaderXML();
+        } else if (ch == 'S' || ch == 's') {
+            loader = new LoaderSQL();
+        }
     }
 
     @Override
     public void addUser(Document document, User us) throws FileNotFoundException, TransformerException {
-       loader.addUser(document, us);
+        loader.addUser(document, us);
     }
 
     @Override
     public User readDocument(Document document) throws ParserConfigurationException, SAXException, IOException {
-    return loader.readDocument(document);
+        return loader.readDocument(document);
     }
 
     @Override
     public void writeDocument(Document document) throws TransformerConfigurationException, FileNotFoundException, TransformerException {
         loader.writeDocument(document);
     }
-    
+
 }
