@@ -15,7 +15,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,15 +24,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import model.*;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -53,13 +48,15 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         currentUser = user;
         jLabel1.setText(jLabel1.getText() + " " + user.getLogin());
         currentDocument = document;
-        currentTaskLog = user.getTaskLog();
+        currentTaskLog = user.getTaskLog();        
         Transfer.table = jTable1;
         Transfer.tl = currentTaskLog;
         Transfer.model = model;
         clear();
+        Transfer.previousSize = 0;
         currentTaskLog.updateTable();
         updateNotification();
+        
     }
 // public SimpleTaskManager(User user) throws ParserConfigurationException, SAXException, IOException {
 //        initComponents();
@@ -231,7 +228,7 @@ public class SimpleTaskManager extends javax.swing.JFrame {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(jButton2))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -252,7 +249,7 @@ public class SimpleTaskManager extends javax.swing.JFrame {
                                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton3))
                                 .addGap(0, 2, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton4))))
                     .addComponent(jSeparator1))
@@ -269,15 +266,16 @@ public class SimpleTaskManager extends javax.swing.JFrame {
 
             try {
                 rec = new Record(jTextField1.getText(), jTextField3.getText(), jTextField2.getText(), jTextField4.getText());
+                Transfer.previousSize = currentTaskLog.getNumberOfRecords();
                 currentTaskLog.addRecord(rec);
                 clear();
                 updateNotification();
             } catch (InvalidRecordFieldException ex) {
-                jTextField1.setText(ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
 
         } else {
-            jTextField1.setText("Для добавления записи все поля необходимо заполнить!");
+            JOptionPane.showMessageDialog(null,"Для добавления записи все поля необходимо заполнить!");
         }
 
 
@@ -300,6 +298,7 @@ public class SimpleTaskManager extends javax.swing.JFrame {
             }
             clear();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Номер записи указан не верно!");
             clear();
         }
 
@@ -309,12 +308,14 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if ((!"".equals(jTextField5.getText()))&&(Integer.parseInt(jTextField5.getText())<currentTaskLog.getNumberOfRecords())) {
+                Transfer.previousSize = currentTaskLog.getNumberOfRecords();
                 currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
                 clear();
                 updateNotification();
             }
             clear();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Номер записи указан не верно!");
             jTextField5.setText("");
         }
 
@@ -327,7 +328,7 @@ public class SimpleTaskManager extends javax.swing.JFrame {
             load.setLoaders('X');
             load.addUser(currentDocument, currentUser);
         } catch (FileNotFoundException | TransformerException ex) {
-
+            JOptionPane.showMessageDialog(null, "Не удалось сохранить журнал: " + ex.getMessage());
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 

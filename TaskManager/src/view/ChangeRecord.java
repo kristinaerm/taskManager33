@@ -8,6 +8,7 @@ package view;
 import exceptions.InvalidRecordFieldException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.*;
 
 /**
@@ -144,7 +145,7 @@ public class ChangeRecord extends javax.swing.JFrame {
             // TODO add your handling code here:
             Transfer.tl.changeRecord(num, jTextField2.getText(), jTextField1.getText(), jTextField3.getText(), jTextField4.getText());
         } catch (InvalidRecordFieldException ex) {
-            jTextField1.setText(ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
