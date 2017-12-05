@@ -56,13 +56,13 @@ public class TaskManager {
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 //            // Создается дерево DOM документа из файла
         //Document document = documentBuilder.parse("Catalog.xml");
-           Document document = documentBuilder.parse("other.xml");
-           Loaders load=new Loaders();
-           load.setLoaders('X');
-           User u = load.readDocument(document);
+        Document document = documentBuilder.parse("other.xml");
+        Loaders load = new Loaders();
+        load.setLoaders('X');
+        User u = load.readDocument(document);
 
-       SimpleTaskManager frame = new SimpleTaskManager(u, document);
-    //  SimpleTaskManager frame = new SimpleTaskManager(u);
+        SimpleTaskManager frame = new SimpleTaskManager(u, document);
+        //  SimpleTaskManager frame = new SimpleTaskManager(u);
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -77,15 +77,15 @@ public class TaskManager {
                 try {
 //                    User u = new User("1", null, null, list);
                     // Вызываем метод для записи,пока создала объект u
-                  
+
 //            // Создается дерево DOM документа из файла
-                  Document document1 = documentBuilder.parse("Catalog.xml");
-           
+                    Document document1 = documentBuilder.parse("Catalog.xml");
+
                     load.addUser(document1, u);
 
-              } catch (FileNotFoundException ex) {
-                   Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
-               } catch (SAXException ex) {
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SAXException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(TaskManager.class.getName()).log(Level.SEVERE, null, ex);

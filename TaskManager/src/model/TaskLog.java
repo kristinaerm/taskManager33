@@ -24,16 +24,19 @@ public class TaskLog {
     private final String id;
 
     public TaskLog(LinkedList<Record> rec) {
-        
+
         id = UUID.randomUUID().toString();
         records = rec;
         sort();
-        
+
     }
 
     public void updateTable() {
-        for (int i = 0; i < Transfer.model.getRowCount(); i++) {
-            Transfer.model.removeRow(i);
+
+        while (Transfer.model.getRowCount() != 0) {
+            for (int i = 0; i < Transfer.model.getRowCount(); i++) {
+                Transfer.model.removeRow(i);
+            }
         }
         for (int i = 0; i < records.size(); i++) {
             Transfer.model.addRow(new Object[]{i, getRecord(i).getName(), getRecord(i).getTimeString(), getRecord(i).getDescription(), getRecord(i).getContacts()});
@@ -70,7 +73,7 @@ public class TaskLog {
             records.get(n).setName(na);
         }
         if ((!ti.equals(""))) {
-            records.get(n).setTime(ti);            
+            records.get(n).setTime(ti);
         }
         if ((!des.equals(""))) {
             records.get(n).setDescription(des);
@@ -83,8 +86,7 @@ public class TaskLog {
     }
 
     public Record getRecord(int n) {
-              
-      
+
         return records.get(n);
     }
 
@@ -96,7 +98,7 @@ public class TaskLog {
 
     public void deleteRecord(int n) {
         records.remove(n);
-        
+
         updateTable();
     }
 
@@ -112,7 +114,5 @@ public class TaskLog {
                 }
             }
         }
-        }
     }
-    
-
+}

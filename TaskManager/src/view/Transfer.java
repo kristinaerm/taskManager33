@@ -17,5 +17,5 @@ public class Transfer {
 
     public static TaskLog tl;
     public static JTable table;
-    public static DefaultTableModel model;
+    public static volatile DefaultTableModel model;
 }

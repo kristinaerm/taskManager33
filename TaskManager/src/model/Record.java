@@ -50,13 +50,13 @@ public class Record implements Comparable {
                         throw new InvalidRecordFieldException("Неправильный формат даты или прошедшее время. дд-мм-гггг чч:мм");
                     }
                 } else {
-                    throw new InvalidRecordFieldException("Длина поля не должна превышать 15 символов.");
+                    throw new InvalidRecordFieldException("Длина поля контактов не должна превышать 15 символов.");
                 }
             } else {
-                throw new InvalidRecordFieldException("Длина поля не должна превышать 30 символов.");
+                throw new InvalidRecordFieldException("Длина поля описания не должна превышать 30 символов.");
             }
         } else {
-            throw new InvalidRecordFieldException("Длина поля не должна превышать 15 символов.");
+            throw new InvalidRecordFieldException("Длина поля названия не должна превышать 15 символов.");
         }
 
     }

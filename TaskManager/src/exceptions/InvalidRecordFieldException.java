@@ -9,7 +9,8 @@ package exceptions;
  *
  * @author USER
  */
-public class InvalidRecordFieldException extends Exception{
+public class InvalidRecordFieldException extends Exception {
+
     public InvalidRecordFieldException() {
     }
 
