@@ -18,5 +18,4 @@ public class Transfer {
     public static TaskLog tl;
     public static JTable table;
     public static volatile DefaultTableModel model;
-    public static int previousSize;
 }

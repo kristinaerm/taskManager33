@@ -53,7 +53,6 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         Transfer.tl = currentTaskLog;
         Transfer.model = model;
         clear();
-        Transfer.previousSize = 0;
         currentTaskLog.updateTable();
         updateNotification();
         
@@ -266,7 +265,6 @@ public class SimpleTaskManager extends javax.swing.JFrame {
 
             try {
                 rec = new Record(jTextField1.getText(), jTextField3.getText(), jTextField2.getText(), jTextField4.getText());
-                Transfer.previousSize = currentTaskLog.getNumberOfRecords();
                 currentTaskLog.addRecord(rec);
                 clear();
                 updateNotification();
@@ -308,7 +306,6 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if ((!"".equals(jTextField5.getText()))&&(Integer.parseInt(jTextField5.getText())<currentTaskLog.getNumberOfRecords())) {
-                Transfer.previousSize = currentTaskLog.getNumberOfRecords();
                 currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
                 clear();
                 updateNotification();
