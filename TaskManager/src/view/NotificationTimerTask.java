@@ -7,18 +7,22 @@ package view;
 
 import java.util.TimerTask;
 import javax.swing.JFrame;
-import model.TaskLog;
 
 /**
  *
  * @author USER
  */
 public class NotificationTimerTask extends TimerTask {
+    
+    private static int n;
+    
+    public NotificationTimerTask(int num){
+        n=num;
+    }
 
     @Override
     public void run() {
-        SimpleNotification frame = new SimpleNotification(Transfer.tl);
-
+        SimpleNotification frame = new SimpleNotification(n);
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);

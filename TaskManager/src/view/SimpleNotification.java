@@ -21,14 +21,17 @@ public class SimpleNotification extends javax.swing.JFrame {
     /**
      * Creates new form NotificationInterface
      */
+    private int n;
+    
     public SimpleNotification() {
         initComponents();
     }
 
-    public SimpleNotification(TaskLog tl) {
+    public SimpleNotification(int num) {
         initComponents();
-        currentTaskLog = tl;
-        currentRec = tl.getRecord(0);
+        n=num;
+        currentTaskLog = Transfer.tl;
+        currentRec = Transfer.tl.getRecord(n);
         jTextField1.setText(currentRec.getTimeString());
         jTextField2.setText(currentRec.getName());
         jTextField3.setText(currentRec.getDescription());
@@ -152,7 +155,7 @@ public class SimpleNotification extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        currentTaskLog.deleteRecord(0);
+        currentTaskLog.deleteRecord(n);
         currentTaskLog.updateTable();
         this.dispose();
         //закрыть
@@ -161,7 +164,7 @@ public class SimpleNotification extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
-            currentTaskLog.changeRecord(0, currentRec.getName(), jTextField5.getText(), currentRec.getDescription(), currentRec.getContacts());
+            currentTaskLog.changeRecord(n, currentRec.getName(), jTextField5.getText(), currentRec.getDescription(), currentRec.getContacts());
             currentTaskLog.updateTable();
             this.dispose();
         } catch (InvalidRecordFieldException ex) {
