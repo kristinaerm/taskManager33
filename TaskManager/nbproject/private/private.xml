@@ -3,9 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/USER/Documents/GitHub/taskManager33/TaskManager/src/view/SimpleNotification.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/taskManager33/TaskManager/src/view/NotificationTimerTasks.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/taskManager33/TaskManager/src/view/NotificationTimerTask.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/taskManager33/TaskManager/src/view/SimpleTaskManager.java</file>
+        </group>
+    </open-files>
+=======
+<<<<<<< HEAD
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
             <file>file:/C:/Users/Кристина/Documents/GitHub/taskManager33/TaskManager/src/taskmanager/TaskManager.java</file>
             <file>file:/C:/Users/Кристина/Documents/GitHub/taskManager33/TaskManager/src/view/SimpleTaskManager.java</file>
             <file>file:/C:/Users/Кристина/Documents/GitHub/taskManager33/TaskManager/src/model/Record.java</file>
         </group>
     </open-files>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 46bce3addaa73793c4c6575babbb89d42cb69867
+>>>>>>> 2bd54fea2ca9269cb4d28b46063e20dda6b91a88
+>>>>>>> 6f086cae5ad58e2fff1cdb4ee16d5936409c3824
 </project-private>
