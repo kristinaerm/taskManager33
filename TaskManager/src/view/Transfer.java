@@ -16,6 +16,5 @@ import model.TaskLog;
 public class Transfer {
 
     public static TaskLog tl;
-    public static JTable table;
     public static volatile DefaultTableModel model;
 }

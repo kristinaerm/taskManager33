@@ -48,8 +48,7 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         currentUser = user;
         jLabel1.setText(jLabel1.getText() + " " + user.getLogin());
         currentDocument = document;
-        currentTaskLog = user.getTaskLog();        
-        Transfer.table = jTable1;
+        currentTaskLog = user.getTaskLog();
         Transfer.tl = currentTaskLog;
         Transfer.model = model;
         clear();
@@ -335,17 +334,63 @@ public class SimpleTaskManager extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void updateNotification() {
+    //*****************************************************************************************
+    private void updateNotification() {     
+        
         try {
             timer.cancel();
             int purge = timer.purge();
         } catch (Exception e) {
+        }
 
-        }
+        int n = 1;
+        int i = 0;
         if (currentTaskLog.getNumberOfRecords() > 0) {
+
+            while ((currentTaskLog.getNumberOfRecords() > (i + 1)) && (currentTaskLog.getRecord(i).compareTo(currentTaskLog.getRecord(i + 1)) == 0)) {
+                n++;
+                i++;
+            }
             timer = new Timer();
-            timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
+            timer.schedule(new NotificationTimerTasks(n), currentTaskLog.getRecord(0).getTime());
         }
+        
+        
+//        try {
+//            for (int i = 0; i < timers.length; i++) {
+//
+//                timers[i].cancel();
+//                int purge = timers[i].purge();
+//            }
+//        } catch (Exception e) {
+//        }
+//
+//        int n = 1;
+//        int i = 0;
+//        if (currentTaskLog.getNumberOfRecords() > 0) {
+//
+//            while ((currentTaskLog.getNumberOfRecords() > (i + 1)) && (currentTaskLog.getRecord(i).compareTo(currentTaskLog.getRecord(i + 1)) == 0)) {
+//                n++;
+//                i++;
+//            }
+//            timers = new Timer[n];
+//            for (int j = 0; j < n; j++) {
+//                timers[j] = new Timer();
+//                timers[j].schedule(new NotificationTimerTask(j), currentTaskLog.getRecord(j).getTime());
+//            }
+//
+//        }
+        
+//        try {
+//            timer.cancel();
+//            int purge = timer.purge();
+//        } catch (Exception e) {
+//
+//        }
+//        if (currentTaskLog.getNumberOfRecords() > 0) {
+//            timer = new Timer();
+//            timer.schedule(new NotificationTimerTask(), currentTaskLog.getRecord(0).getTime());
+//        }
     }
 
     private void clear() {
@@ -466,6 +511,7 @@ public class SimpleTaskManager extends javax.swing.JFrame {
     private static User currentUser;
     private static TaskLog currentTaskLog;
     private static Timer timer = new Timer();
+    private static Timer[] timers;
     private static DefaultTableModel model = new javax.swing.table.DefaultTableModel(
             new Object[][]{
                 {null, null, null, null, null}
