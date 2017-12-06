@@ -282,9 +282,13 @@ public class SimpleTaskManager extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         try {
-            if (!"".equals(jTextField6.getText())) {                
-                if (Integer.parseInt(jTextField6.getText()) < currentTaskLog.getNumberOfRecords()) {
-                    ChangeRecord frame = new ChangeRecord(Integer.parseInt(jTextField6.getText()));
+            //if (!"".equals(jTextField6.getText()))
+                if(!"".equals(jTable1.getSelectedRow()))
+            {                
+                //if (Integer.parseInt(jTextField6.getText()) < currentTaskLog.getNumberOfRecords()) {
+                  //  ChangeRecord frame = new ChangeRecord(Integer.parseInt(jTextField6.getText()));
+                     if (jTable1.getSelectedRow() < currentTaskLog.getNumberOfRecords()) {
+                    ChangeRecord frame = new ChangeRecord(jTable1.getSelectedRow());
                     frame.setResizable(false);
                     frame.pack();
                     frame.setLocationRelativeTo(null);
@@ -305,8 +309,10 @@ public class SimpleTaskManager extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
-            if ((!"".equals(jTextField5.getText()))&&(Integer.parseInt(jTextField5.getText())<currentTaskLog.getNumberOfRecords())) {
-                currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
+           // if ((!"".equals(jTextField5.getText()))&&(Integer.parseInt(jTextField5.getText())<currentTaskLog.getNumberOfRecords())) {
+             //   currentTaskLog.deleteRecord(Integer.parseInt(jTextField5.getText()));
+               if(!"".equals(jTable1.getSelectedRow())){
+                   currentTaskLog.deleteRecord(jTable1.getSelectedRow());
                 clear();
                 updateNotification();
             }
